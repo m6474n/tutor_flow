@@ -20,10 +20,7 @@ copyToClipboard({String? text}) async {
 }
 
 //
-final TextStyle primaryTextStyle = TextStyle(
-  color: colorManager.textColor,
-  fontFamily: 'SF Pro',
-);
+
 //
 toggleDrawer(GlobalKey<ScaffoldState> key) {
   key.currentState!.isDrawerOpen

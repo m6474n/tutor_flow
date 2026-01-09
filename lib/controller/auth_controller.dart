@@ -9,7 +9,8 @@ import 'package:tution_manager/view/dashboard.dart';
 
 class AuthController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
   final TextEditingController emailCont = TextEditingController(),
   nameCont = TextEditingController(),
   phoneCont = TextEditingController(),
@@ -18,8 +19,8 @@ class AuthController extends GetxController {
   RxBool obscure = true.obs;
 
   authenticate() async {
-    if (formKey.currentState!.validate()) {
-      var res = await api.authenticate(emailCont.text, passCont.text);
+    if (loginFormKey.currentState!.validate()) {
+      var res = {};
       if (res != null) {
         prettyPrint(res);
         var data = res['data'];

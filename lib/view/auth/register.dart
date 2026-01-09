@@ -1,11 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:path/path.dart';
 import 'package:tution_manager/component/custom_appbar.dart';
 import 'package:tution_manager/component/custom_button.dart';
 import 'package:tution_manager/component/custom_drawer.dart';
@@ -16,31 +13,30 @@ import 'package:tution_manager/service/api_service.dart';
 import 'package:tution_manager/utils/app_routes.dart';
 import 'package:tution_manager/utils/auth_service.dart';
 import 'package:tution_manager/utils/constants.dart';
-import 'package:tution_manager/utils/enums.dart';
 import 'package:tution_manager/utils/helpers.dart';
 import 'package:tution_manager/utils/custom_styles.dart';
 import 'package:tution_manager/view/dashboard.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
       init: AuthController(),
       builder: (cont) {
         return Scaffold(
-        backgroundColor: colorManager.bgDark,
+           backgroundColor: colorManager.bgDark,
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
-                key: cont.loginFormKey,
+                key: cont.registerFormKey,
                 child: Column(
                   spacing: 12,
                   mainAxisSize: MainAxisSize.min,
@@ -49,10 +45,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Hero(tag: 'app-logo', child: 
                     Image.asset(appLogo, height: 120)),
-                    // Text(dotenv.env[EnvKey.databasePassword.key]??''),
                     Text(
-                      'Enter your creadentials to login.',
+                      'Create new account to continue',
                       style: CustomStyles.primaryTextStyle().copyWith(fontSize: 16),
+                    ),
+                    CustomInputField(
+                      controller: cont.nameCont,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 18),
+                        child: HugeIcon(
+                          icon: HugeIcons.strokeRoundedUser,
+                          color: colorManager.secondaryColor,
+                        ),
+                      ),
+                      label: "Name",
                     ),
                     CustomInputField(
                       controller: cont.emailCont,
@@ -64,6 +70,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       label: "Email",
+                    ),
+                      CustomInputField(
+                      controller: cont.phoneCont,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 18),
+                        child: HugeIcon(
+                          icon: HugeIcons.strokeRoundedAiPhone01,
+                          color: colorManager.secondaryColor,
+                        ),
+                      ),
+                      label: "Phone",
                     ),
                     Obx(() {
                       return CustomInputField(
@@ -94,7 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     }),
                     CustomButton(
-                      
                       label: "Login",
                       onTap: () {
                         cont.authenticate();
@@ -102,17 +118,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     RichText(
                       text: TextSpan(
-                        text: "Don't have an account? ",
+                        text: "Already have an account? ",
                         style:CustomStyles. primaryTextStyle(),
                         children: [
                           TextSpan(
                             recognizer:  TapGestureRecognizer()
                     ..onTap = () {
-                     Get.offAllNamed(AppRoutes.signup);
+                     Get.offAllNamed(AppRoutes.login);
                     
                     },
                           
-                            text: 'Register',
+                            text: 'Login',
                             style:CustomStyles. primaryTextStyle().copyWith(
                               color: colorManager.primaryColor,
                               fontWeight: FontWeight.w800,
@@ -120,12 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                    ),
-                     OutlineButton(
-                      label: "Continue with Google",
-                      onTap: () {
-                        cont.authenticate();
-                      },
                     ),
                   ],
                 ),

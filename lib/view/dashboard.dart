@@ -4,6 +4,7 @@ import 'package:tution_manager/component/custom_appbar.dart';
 import 'package:tution_manager/component/custom_drawer.dart';
 import 'package:tution_manager/main.dart';
 import 'package:tution_manager/utils/helpers.dart';
+import 'package:tution_manager/utils/custom_styles.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -43,7 +44,15 @@ class _DashboardState extends State<Dashboard> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [],
+          children: [
+            Text("Headin h1",style: CustomStyles.h1(),),
+            Text("Headin h2",style: CustomStyles.h2(),),
+            Text("Headin h3",style: CustomStyles.h3(),),
+            Text("Headin h4",style: CustomStyles.h4(),),
+            Text("Headin h5",style: CustomStyles.h5(),),
+            Text("Headin h6",style: CustomStyles.h6(),),
+            Text("Paragraph",style: CustomStyles.paragraph(),),
+          ],
         ),
       ),
     );

@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tution_manager/controller/theme/theme_controller.dart';
 import 'package:tution_manager/service/api_service.dart';
 import 'package:tution_manager/utils/app_routes.dart';
-import 'package:tution_manager/view/splash_screen.dart';
+import 'package:tution_manager/utils/enums.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
+  await Supabase.initialize(url: EnvKey.projectURL.key, anonKey: EnvKey.publisherKey.key);
   runApp(const MyApp());
 }
 
 final ColorManager colorManager = Get.put(ColorManager());
-final ApiServices api = ApiServices();
+final supabase = Supabase.instance.client;
+final ApiService api = ApiService();
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
           background: colorManager.bgDark,
         ),
       ),
-      initialRoute: '/',
+      initialRoute: '/dashboard',
       getPages: AppRoutes.routes,
       builder: EasyLoading.init(),
     );

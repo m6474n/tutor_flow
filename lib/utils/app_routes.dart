@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tution_manager/view/auth/login.dart';
+import 'package:tution_manager/view/auth/register.dart';
 import 'package:tution_manager/view/dashboard.dart';
 import 'package:tution_manager/view/splash_screen.dart';
 
@@ -8,7 +9,7 @@ class AppRoutes {
   static const dashboard = '/dashboard';
   static const homepage = '/home';
   static const login = '/login';
-  static const signup = '/sign_up';
+  static const signup = '/register';
   static const localStorage = '/prefs';
  
   static const profile = '/profile';
@@ -28,10 +29,10 @@ class AppRoutes {
       page: () => Dashboard(),
       // middlewares: [TrackRouteMiddleware()],
     ),
-    // GetPage(
-    //   name: noInternet,
-    //   page: () => NoInternetScreen(),
-    // ),
+    GetPage(
+      name: signup,
+      page: () => RegisterScreen(),
+    ),
     GetPage(
       name: dashboard,
       page: () => Dashboard(),
