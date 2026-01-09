@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:tution_manager/component/custom_appbar.dart';
@@ -61,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Hero(tag: 'app-logo', child: 
                   Image.asset(appLogo, height: 120)),
+                  Text(dotenv.env['DATABASE_PASSWORD']??''),
                   Text(
                     'Enter your creadentials to login.',
                     style: primaryTextStyle.copyWith(fontSize: 16),
