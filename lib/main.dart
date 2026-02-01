@@ -11,13 +11,17 @@ import 'package:tution_manager/utils/enums.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
-  await Supabase.initialize(url: EnvKey.projectURL.key, anonKey: EnvKey.publisherKey.key);
+  await Supabase.initialize(
+    url: EnvKey.projectURL.key,
+    anonKey: EnvKey.publisherKey.key,
+  );
   runApp(const MyApp());
 }
 
 final ColorManager colorManager = Get.put(ColorManager());
 final supabase = Supabase.instance.client;
 final ApiService api = ApiService();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -56,7 +60,19 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/dashboard',
       getPages: AppRoutes.routes,
-      builder: EasyLoading.init(),
+      builder: (context, child) {
+        child = EasyLoading.init()(context, child);
+        return GetBuilder<ColorManager>(
+          builder: (controller) {
+            return MediaQuery(
+              data: MediaQuery.of(
+                context,
+              ).copyWith(textScaler: TextScaler.linear(controller.fontScale)),
+              child: child!,
+            );
+          },
+        );
+      },
     );
   }
 }

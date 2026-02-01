@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedArrowLeft01,
-                  color: colorManager.secondaryColor,
+                  color: colorManager.primaryColor,
                 ),
               )
             : SizedBox(),
